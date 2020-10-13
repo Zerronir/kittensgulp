@@ -6,8 +6,6 @@ const concat = require('gulp-concat');
 const CompSass = require('gulp-sass');
 const gulpBabel = require('gulp-babel');
 
-const babelName = 'all-babel.js';
-
 /* Watchers per al scss */
 function sass(){
     return src('sass/**/*.scss')
@@ -64,3 +62,6 @@ exports.min = series(minifyCSS, minifyJS);
 exports.concatStyles = concatCSS;
 exports.concatScripts = concatJS;
 exports.babel = allBabel;
+
+/* REALITZAR TOTES LES TASQUES */
+exports.kittens = series(sass, minifyCSS, minifyJS, concatCSS, concatJS, allBabel);
