@@ -31,9 +31,25 @@ function minifyJS(){
 }
 
 /* Concats */
+function concatCSS(){
+    return src('css/*.css')
+        .pipe(cleanCSS())
+        .pipe(concat('all.css'))
+        .pipe(dest('dist/css/'));
+}
 
+function concatJS(){
+    return src('js/*.js')
+        .pipe(cleanCSS())
+        .pipe(concat('all.js'))
+        .pipe(dest('dist/js/'));
+}
 
+/* Babel JS */
 
+/*TASQUES*/
 exports.sass = sass;
 exports.watchSass = watcherSass;
 exports.min = series(minifyCSS, minifyJS);
+exports.concatStyles = concatCSS;
+exports.concatScripts = concatJS;
