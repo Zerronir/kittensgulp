@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const { watch, series, src, dest } = require('gulp');
+const { watch, series, src, dest, parallel } = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const cleanJS = require('gulp-uglify');
 const concat = require('gulp-concat');
@@ -58,7 +58,7 @@ function allBabel(){
 /*TASQUES*/
 exports.sass = sass;
 exports.watchSass = watcherSass;
-exports.min = series(minifyCSS, minifyJS);
+exports.minifyAll = series(minifyCSS, minifyJS);
 exports.concatStyles = concatCSS;
 exports.concatScripts = concatJS;
 exports.babel = allBabel;
