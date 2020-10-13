@@ -4,6 +4,9 @@ const cleanCSS = require('gulp-clean-css');
 const cleanJS = require('gulp-uglify');
 const concat = require('gulp-concat');
 const CompSass = require('gulp-sass');
+const gulpBabel = require('gulp-babel');
+
+const babelName = 'all-babel.js';
 
 /* Watchers per al scss */
 function sass(){
@@ -40,12 +43,19 @@ function concatCSS(){
 
 function concatJS(){
     return src('js/*.js')
-        .pipe(cleanCSS())
+        .pipe(cleanJS())
         .pipe(concat('all.js'))
         .pipe(dest('dist/js/'));
 }
 
 /* Babel JS */
+function allBabel(){
+    return src('dist/js/all.js')
+        .pipe(gulpBabel())
+        .pipe(concat('all-babel.js'))
+        .pipe(dest('dist/js/'));
+}
+
 
 /*TASQUES*/
 exports.sass = sass;
@@ -53,3 +63,4 @@ exports.watchSass = watcherSass;
 exports.min = series(minifyCSS, minifyJS);
 exports.concatStyles = concatCSS;
 exports.concatScripts = concatJS;
+exports.babel = allBabel;
