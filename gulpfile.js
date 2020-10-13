@@ -5,6 +5,7 @@ const cleanJS = require('gulp-uglify');
 const concat = require('gulp-concat');
 const CompSass = require('gulp-sass');
 const gulpBabel = require('gulp-babel');
+const sort = require('sort-stream');
 
 /* Watchers per al scss */
 function sass(){
@@ -21,14 +22,14 @@ function watcherSass() {
 function minifyCSS(){
     return src('css/*.css')
         .pipe(cleanCSS())
-        .pipe(dest('lib/css/'));
+        .pipe(dest('dist/css/'));
 }
 
 /* Funció per a minimitzar el js */
 function minifyJS(){
     return src('js/*.js')
         .pipe(cleanJS())
-        .pipe(dest('lib/js/'));
+        .pipe(dest('dist/js/'));
 }
 
 /* Concats */
@@ -41,6 +42,7 @@ function concatCSS(){
 
 function concatJS(){
     return src('js/*.js')
+        .pipe(sort())
         .pipe(cleanJS())
         .pipe(concat('all.js'))
         .pipe(dest('dist/js/'));
