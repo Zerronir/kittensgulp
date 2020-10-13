@@ -3,13 +3,17 @@ const { watch, series, src, dest } = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const cleanJS = require('gulp-uglify');
 const concat = require('gulp-concat');
-const sass = require('gulp-sass');
+const CompSass = require('gulp-sass');
 
 /* Watchers per al scss */
-function watcherSASS(){
-    return src('sass/*.scss')
-        .pipe(sass())
+function sass(){
+    return src('sass/**/*.scss')
+        .pipe(CompSass())
         .pipe(dest('css/'))
+}
+
+function watcherSass() {
+    watch('sass/**/*.scss', sass);
 }
 
 /* Funció o tarea per a minimitzar el css */
@@ -26,5 +30,10 @@ function minifyJS(){
         .pipe(dest('lib/js/'));
 }
 
+/* Concats */
 
+
+
+exports.sass = sass;
+exports.watchSass = watcherSass;
 exports.min = series(minifyCSS, minifyJS);
